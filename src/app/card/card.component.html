@@ -1,0 +1,10 @@
+<mat-card class="card">
+  <mat-card-title class="card__title">Project</mat-card-title>
+  <hr />
+  <mat-selection-list #shoes>
+    <mat-list-option class="mat-primary red" checkboxPosition="before" *ngFor="let shoe of typesOfShoes">
+      {{shoe}}
+    </mat-list-option>
+  </mat-selection-list>
+</mat-card>
+
