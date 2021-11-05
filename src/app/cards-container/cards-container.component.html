@@ -1,9 +1,7 @@
-<div class="cards-container" (newTodo)="onCreate(newTodo)">
+<div class="cards-container">
 
   <app-card
-  *ngFor="let card of allCards"
-  [title]="card.title"
-  [catId]="card.id"
+  *ngFor="let card of cardsData"
   [card] = "card"
   ></app-card>
 

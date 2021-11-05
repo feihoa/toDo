@@ -1,5 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
-import { DataServiceService } from '../data/data-service.service';
 import { HttpServiceService } from '../data/http-service.service';
 import { CardsInterface } from '../data/cardsInterface';
 import { plainToClass } from 'class-transformer';
@@ -13,28 +13,27 @@ import { CardComponent } from '../card/card.component';
 })
 export class CardsContainerComponent implements OnInit {
 
-  allCards: CardsInterface[] = this.tasks.cardsArray;
-  cardData :any= [];
+  allCards !: CardsInterface[];
+  cardsData :any= [];
   newTodo :any= [];
 
-  @Input() newTask:CardsInterface[] | undefined;
+  // @Input() newTask:CardsInterface[] | undefined;
 
   constructor(
-    private tasks: DataServiceService,
-    private dataApi: HttpServiceService,
-
+    private httpServiceService: HttpServiceService,
   ) {}
 
-  ngOnInit(): void {
-    this.dataApi.getDataFromApi().subscribe({
+  getTasks(){
+    this.httpServiceService.getDataFromApi().subscribe({
       next: (data) => {
-        this.tasks.setTasks(data);
-        this.cardData = plainToClass(CardComponent, this.tasks.cardsArray);
-        this.allCards = this.cardData;
-        console.log(this.allCards)
+        this.cardsData = plainToClass(CardComponent, data);
+        console.log(this.cardsData)
       },
       error: (err) => console.log(err),
     });
+  }
+  ngOnInit(): void {
+    this.getTasks();
   }
   onCreate(task:any){
     console.log(task)

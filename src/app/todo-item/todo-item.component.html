@@ -1,6 +1,9 @@
-    <mat-list-option attr.cat-id={{catId}} id={{id}} selected={{isCompleted}}
-    class="mat-primary red"
-    checkboxPosition="before"
+    <mat-list-option
+      attr.cat-id={{catId}}
+      id={{task.id}}
+      selected={{task.isCompleted}}
+      class="mat-primary red"
+      checkboxPosition="before"
     >
-      {{text}}
+      {{task.text}}
     </mat-list-option>

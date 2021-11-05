@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataServiceService } from '../data/data-service.service';
 import { HttpServiceService } from '../data/http-service.service';
 import { plainToClass } from 'class-transformer';
 import { CardsInterface } from '../data/cardsInterface';
@@ -25,7 +24,6 @@ export class FormComponent implements OnInit {
    @Output() onSubmitForm = new EventEmitter<boolean>();
 
   constructor(
-    private tasks: DataServiceService,
     private dataApi: HttpServiceService,
     private fb: FormBuilder)
 
@@ -34,7 +32,6 @@ export class FormComponent implements OnInit {
   ngOnInit(){
     this.dataApi.getDataFromApi().subscribe({
       next: (data) => {
-        this.tasks.setTasks(data);
         data.forEach(item => {
           this.cardData.push(item.title)
         })

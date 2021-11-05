@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CardsInterface } from './cardsInterface';
-
+import { TasksInterface } from './tasksInterface';
+import { catchError, map, tap } from 'rxjs/operators';
+import { classToPlain } from 'class-transformer';
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +15,25 @@ export class HttpServiceService {
   private url = 'http://localhost:3000';
   private endPoint = '/';
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
   constructor(private http: HttpClient) {}
 
   getDataFromApi(): Observable<CardsInterface[]> {
     this.endPoint = '/projects';
     return this.http.get<CardsInterface[]>(this.url + this.endPoint);
   }
-  postData(taskToPost: CardsInterface): Observable<any> {
+  postData(taskToPost: TasksInterface): Observable<TasksInterface> {
     this.endPoint = `/todos`;
     console.log(taskToPost)
-
-    return this.http.post<CardsInterface[]>(this.url + this.endPoint, {task:taskToPost});
+    return this.http.post<TasksInterface>(this.url + this.endPoint, taskToPost, this.httpOptions);
   }
-  updateData(catId:number, taskToUpdate: CardsInterface): Observable<any> {
-    this.endPoint = `/projects/${catId}/todo/${taskToUpdate.id}`;
-
-    return this.http.patch(this.url + this.endPoint, {task:taskToUpdate});
+  updateData(card:CardsInterface, task: TasksInterface): Observable<TasksInterface> {
+    let cardData = classToPlain(card)
+    let taskData = classToPlain(task)
+    this.endPoint = `/projects/${cardData.id}/todo/${taskData.id}`;
+    return this.http.patch<TasksInterface>(this.url + this.endPoint, {task:taskData}, this.httpOptions);
   }
 }

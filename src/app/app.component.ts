@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { DataServiceService } from './data/data-service.service';
 import { HttpServiceService } from './data/http-service.service';
 import { CardsInterface } from './data/cardsInterface';
+import { TasksInterface } from './data/tasksInterface';
 import { plainToClass} from 'class-transformer';
 
 
@@ -14,10 +14,9 @@ import { plainToClass} from 'class-transformer';
 export class AppComponent {
   title = 'todo';
   popupOpen = false;
-  newTask:CardsInterface[] = []
+  // newTask:TasksInterface[] = []
 
   constructor(
-    private tasks: DataServiceService,
     private dataApi: HttpServiceService,
     private http: HttpClient)
     {}
@@ -36,14 +35,14 @@ export class AppComponent {
     }
   };
   onSubmit(data:any){
-    this.dataApi.postData(data).subscribe((data) => {
-      // this.newTask = plainToClass(CardComponent, data);
+    // this.dataApi.postData(data).subscribe((data) => {
+    //   // this.newTask = plainToClass(CardComponent, data);
 
-    this.newTask = data
-    console.log(data)
-    this.tasks.createTask(data)
+    // this.newTask = data
+    // console.log(data)
+    // this.tasks.createTask(data)
 
-    });
+    // });
   }
 
 }

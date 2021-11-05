@@ -1,14 +1,12 @@
-<mat-card class="card" attr.cat-id={{catId}}>
-  <mat-card-title class="card__title">{{title}}</mat-card-title>
+<mat-card class="card">
+  <mat-card-title class="card__title">{{card.title}}</mat-card-title>
   <hr />
   <mat-selection-list>
       <app-todo-item
-      *ngFor="let task of allTasks"
-      [catId]="catId"
-      [id]="task.id"
-      [text]="task.text"
-      [isCompleted]="task.isCompleted"
-      (click)="checked(catId, task)"
+      *ngFor="let task of taskData"
+      [task]="task"
+      [catId]="card.id"
+      (click)="checked(card, task)"
       ></app-todo-item>
   </mat-selection-list>
 </mat-card>
