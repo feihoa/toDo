@@ -1,5 +1,5 @@
 <div class="app">
-  <app-header></app-header>
-  <app-cards-container></app-cards-container>
-  <app-popup id="popup" [hidden]="true" data-toggle="modal" data-target="#myModal"></app-popup>
+  <app-header (onClickedBtn)="showForm($event)"></app-header>
+  <app-cards-container [newTask]="newTask"></app-cards-container>
+  <app-popup (onClickedBtns)="hideForm($event)" (onSubmitForm)="onSubmit($event)" *ngIf="popupOpen"></app-popup>
 </div>

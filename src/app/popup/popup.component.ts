@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-popup',
@@ -10,6 +10,16 @@ export class PopupComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  @Output() onClickedBtns = new EventEmitter<boolean>();
+  @Output() onSubmitForm = new EventEmitter<boolean>();
+
+
+  onClickedBtn() {
+    this.onClickedBtns.emit(true);
+  }
+  onSubmit(data:any){
+    this.onSubmitForm.emit(data);
   }
 
 }

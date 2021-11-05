@@ -6,13 +6,11 @@
 
 .taskForm{
   margin: auto;
-  min-width: 320px;
-  width: 60%;
-
-  max-width: 1200px;
+  min-width: 300px;
+  width: 40%;
+  max-width: 50%;
 
   background: white;
-  box-sizing: border-box;
   box-shadow: inset 0px 0px 5px rgba(0,0,0,0.9);
   padding: 10px;
 
@@ -29,7 +27,7 @@
 
 }
 .form-btn{
-  width: 135px;
+  width: 40%;
   height: 45px;
   border-radius: 0%;
 }

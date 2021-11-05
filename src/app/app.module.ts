@@ -17,6 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { PopupComponent } from './popup/popup.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { TodoItemComponent } from './todo-item/todo-item.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +28,7 @@ import { PopupComponent } from './popup/popup.component';
     HeaderComponent,
     FormComponent,
     PopupComponent,
+    TodoItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { PopupComponent } from './popup/popup.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+
+    HttpClientModule
 
   ],
   providers: [],
