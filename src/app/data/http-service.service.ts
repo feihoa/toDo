@@ -14,8 +14,8 @@ export class HttpServiceService {
 
   constructor(private http: HttpClient) {}
 
-  // private url = 'https://gruesome-catacombs-42254.herokuapp.com';
-  private url = 'http://localhost:3000';
+  private url = 'https://gruesome-catacombs-42254.herokuapp.com';
+  // private url = 'http://localhost:3000';
   private endPoint = '/';
 
   httpOptions = {
