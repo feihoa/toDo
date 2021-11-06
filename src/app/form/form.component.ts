@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpServiceService } from '../data/http-service.service';
 import { plainToClass } from 'class-transformer';
 import { CardsInterface } from '../data/cardsInterface';
+import { ProjectsService } from '../data/projects.service';
+
 
 @Component({
   selector: 'app-form',
@@ -19,35 +21,35 @@ export class FormComponent implements OnInit {
   titleSelect:string = '';
   controls = this.taskForm.controls;
 
-
    @Output() onClickedBtn = new EventEmitter<boolean>();
-   @Output() onSubmitForm = new EventEmitter<boolean>();
 
   constructor(
-    private dataApi: HttpServiceService,
+    public projects : ProjectsService,
+    private httpServiceService: HttpServiceService,
     private fb: FormBuilder)
 
   { this.initForm();  }
 
   ngOnInit(){
-    this.dataApi.getDataFromApi().subscribe({
+    this.getCategoties()
+    console.log(this.projects)
+   }
+  getCategoties(){
+    this.httpServiceService.getDataFromApi().subscribe({
       next: (data) => {
         data.forEach(item => {
           this.cardData.push(item.title)
         })
           this.categories = plainToClass(FormComponent, this.cardData);
-
-        console.log(this.categories)
       },
         error: (err) => console.log(err),
     });
-   }
+  }
    changed(value:any){
     value == 'Новая категория' ?
     this.isNewCategory = true :
     this.isNewCategory = false;
    }
-
    initForm(){
     this.taskForm = this.fb.group({
       text: ['',[
@@ -58,23 +60,19 @@ export class FormComponent implements OnInit {
        ]],
     });
    }
-
    hideForm() {
      this.onClickedBtn.emit(false);
    }
-   formSubmitted(e:any){
+   formSubmitted(){
 
     if (this.taskForm.invalid) {
       Object.keys(this.controls)
        .forEach(controlName => this.controls[controlName].markAsTouched());
        return;
       }
+      this.projects.addCard(this.taskForm.value)
 
-     console.log(this.taskForm.value);
-     this.onSubmitForm.emit(this.taskForm.value);
       this.hideForm()
-
-
    }
 
   }

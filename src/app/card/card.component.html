@@ -1,13 +1,20 @@
 <mat-card class="card">
   <mat-card-title class="card__title">{{card.title}}</mat-card-title>
   <hr />
-  <mat-selection-list>
-      <app-todo-item
-      *ngFor="let task of taskData"
-      [task]="task"
-      [catId]="card.id"
-      (click)="checked(card, task)"
-      ></app-todo-item>
+  <mat-selection-list *ngFor="let task of card.todos ">
+    <mat-list-option
+    class="mat-primary red"
+    checkboxPosition="before"
+    attr.cat-id={{catId}}
+    id={{task.id}}
+    selected={{task.isCompleted}}
+
+    (click)="checked(card, task)"
+    >
+    {{task.text}}
+    </mat-list-option>
+
   </mat-selection-list>
 </mat-card>
+
 

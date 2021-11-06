@@ -1,5 +1,5 @@
 <div class="app">
   <app-header (onClickedBtn)="showForm($event)"></app-header>
   <app-cards-container></app-cards-container>
-  <app-popup (onClickedBtns)="hideForm($event)" (onSubmitForm)="onSubmit($event)" *ngIf="popupOpen"></app-popup>
+  <app-popup (onClickedBtns)="hideForm($event)" *ngIf="popupOpen"></app-popup>
 </div>

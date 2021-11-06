@@ -1,9 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { HttpServiceService } from '../data/http-service.service';
+import { Component, OnInit, Input} from '@angular/core';
 import { CardsInterface } from '../data/cardsInterface';
 import { TasksInterface } from '../data/tasksInterface';
-import { plainToClass } from 'class-transformer';
-import { TodoItemComponent } from '../todo-item/todo-item.component';
+import { ProjectsService } from '../data/projects.service';
 
 @Component({
   selector: 'app-card',
@@ -13,23 +11,17 @@ import { TodoItemComponent } from '../todo-item/todo-item.component';
 
 export class CardComponent implements OnInit {
 
-  allTasks !: CardsInterface;
-  taskData !: any;
-
-  @Output() onChanged = new EventEmitter()
-  @Input() card !:CardsInterface;
+  @Input() catId !:number;
+  @Input() card !:any;
 
   constructor(
-    private httpServiceService: HttpServiceService,
+    public projects: ProjectsService,
   ) {}
 
   ngOnInit(): void {
-    this.taskData = plainToClass(TodoItemComponent, this.card.todos);
   }
-  checked(card:CardsInterface, task:TasksInterface) {
-    this.httpServiceService.updateData(card, task).subscribe(
-      (result) => (result),
-      (error) => console.log( error)
-    );
+
+  checked(card:CardsInterface, task:TasksInterface ) {
+    this.projects.checkTask(card, task)
   }
 }

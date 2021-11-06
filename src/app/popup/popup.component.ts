@@ -12,14 +12,8 @@ export class PopupComponent implements OnInit {
   ngOnInit(): void {
   }
   @Output() onClickedBtns = new EventEmitter<boolean>();
-  @Output() onSubmitForm = new EventEmitter<boolean>();
-
 
   onClickedBtn() {
     this.onClickedBtns.emit(true);
   }
-  onSubmit(data:any){
-    this.onSubmitForm.emit(data);
-  }
-
 }

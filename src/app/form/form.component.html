@@ -1,4 +1,4 @@
-<form class="taskForm" [formGroup]="taskForm" (submit)='formSubmitted($event)'>
+<form class="taskForm" [formGroup]="taskForm" (submit)='formSubmitted()'>
 <h2 class="form-title">Новая задача</h2>
 
   <mat-form-field class="taskForm__field" appearance="fill">
@@ -10,7 +10,7 @@
     <mat-label>Категория</mat-label>
     <mat-select id="titleSelect" required formControlName="title" (selectionChange)="changed($event.value)"
     >
-      <mat-option *ngFor="let category of categories"
+      <mat-option *ngFor="let category of categories "
       [value]="category">{{category}}</mat-option>
       <mat-option value="Новая категория">Новая категория</mat-option>
     </mat-select>

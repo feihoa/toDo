@@ -1,9 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpServiceService } from '../data/http-service.service';
-import { CardsInterface } from '../data/cardsInterface';
-import { plainToClass } from 'class-transformer';
-import { CardComponent } from '../card/card.component';
+import { Component, OnInit } from '@angular/core';
+import { ProjectsService } from '../data/projects.service';
 
 
 @Component({
@@ -13,30 +9,12 @@ import { CardComponent } from '../card/card.component';
 })
 export class CardsContainerComponent implements OnInit {
 
-  allCards !: CardsInterface[];
-  cardsData :any= [];
-  newTodo :any= [];
-
-  // @Input() newTask:CardsInterface[] | undefined;
-
   constructor(
-    private httpServiceService: HttpServiceService,
+    public projects: ProjectsService,
   ) {}
 
-  getTasks(){
-    this.httpServiceService.getDataFromApi().subscribe({
-      next: (data) => {
-        this.cardsData = plainToClass(CardComponent, data);
-        console.log(this.cardsData)
-      },
-      error: (err) => console.log(err),
-    });
-  }
+
   ngOnInit(): void {
-    this.getTasks();
-  }
-  onCreate(task:any){
-    console.log(task)
   }
 
 }

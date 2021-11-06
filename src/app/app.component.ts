@@ -34,15 +34,4 @@ export class AppComponent {
       this.popupOpen = false;
     }
   };
-  onSubmit(data:any){
-    // this.dataApi.postData(data).subscribe((data) => {
-    //   // this.newTask = plainToClass(CardComponent, data);
-
-    // this.newTask = data
-    // console.log(data)
-    // this.tasks.createTask(data)
-
-    // });
-  }
-
 }

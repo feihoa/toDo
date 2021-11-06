@@ -1,16 +1,19 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { CardsInterface } from './cardsInterface';
 import { TasksInterface } from './tasksInterface';
-import { catchError, map, tap } from 'rxjs/operators';
 import { classToPlain } from 'class-transformer';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class HttpServiceService {
+
+  constructor(private http: HttpClient) {}
+
   // private url = 'https://gruesome-catacombs-42254.herokuapp.com';
   private url = 'http://localhost:3000';
   private endPoint = '/';
@@ -19,21 +22,25 @@ export class HttpServiceService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) {}
-
-  getDataFromApi(): Observable<CardsInterface[]> {
+  public getDataFromApi(): Observable<CardsInterface[]> {
     this.endPoint = '/projects';
-    return this.http.get<CardsInterface[]>(this.url + this.endPoint);
+    return this.http.get<CardsInterface[]>(this.url + this.endPoint)
+    .pipe(catchError(this.erroHandler));
   }
-  postData(taskToPost: TasksInterface): Observable<TasksInterface> {
-    this.endPoint = `/todos`;
-    console.log(taskToPost)
-    return this.http.post<TasksInterface>(this.url + this.endPoint, taskToPost, this.httpOptions);
-  }
-  updateData(card:CardsInterface, task: TasksInterface): Observable<TasksInterface> {
+  public updateData(card:CardsInterface, task: TasksInterface): Observable<TasksInterface> {
+    console.log(task)
     let cardData = classToPlain(card)
     let taskData = classToPlain(task)
     this.endPoint = `/projects/${cardData.id}/todo/${taskData.id}`;
-    return this.http.patch<TasksInterface>(this.url + this.endPoint, {task:taskData}, this.httpOptions);
+    return this.http.patch<TasksInterface>(this.url + this.endPoint, {task:taskData}, this.httpOptions)
+    .pipe(catchError(this.erroHandler));
+  }
+  public postData(taskToPost: TasksInterface): Observable<TasksInterface> {
+    this.endPoint = `/todos`;
+    return this.http.post<TasksInterface>(this.url + this.endPoint, {task:taskToPost}, this.httpOptions)
+    .pipe(catchError(this.erroHandler));;
+  }
+  erroHandler(error: HttpErrorResponse) {
+    return throwError(error.message || 'server Error');
   }
 }
