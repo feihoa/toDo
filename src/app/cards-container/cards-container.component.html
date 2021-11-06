@@ -1,0 +1,6 @@
+<div class="cards-container" *ngFor="let card of projects.getCards() | async">
+  <app-card
+  [card] = "card"
+  ></app-card>
+
+</div>

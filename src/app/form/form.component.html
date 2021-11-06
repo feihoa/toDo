@@ -1,0 +1,31 @@
+<form class="taskForm" [formGroup]="taskForm" (submit)='formSubmitted()'>
+<h2 class="form-title">Новая задача</h2>
+
+  <mat-form-field class="taskForm__field" appearance="fill">
+    <mat-label>Название задачи...</mat-label>
+    <input matInput type="text" id="text" formControlName="text" required>
+  </mat-form-field>
+
+  <mat-form-field class="taskForm__field" appearance="fill">
+    <mat-label>Категория</mat-label>
+    <mat-select id="titleSelect" required formControlName="title" (selectionChange)="changed($event.value)"
+    >
+      <mat-option *ngFor="let category of categories "
+      [value]="category">{{category}}</mat-option>
+      <mat-option value="Новая категория">Новая категория</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="taskForm__field" *ngIf="isNewCategory" appearance="fill">
+    <mat-label>Название новой категории</mat-label>
+    <input matInput type="text" id="newTitle" formControlName="title" >
+  </mat-form-field>
+
+
+  <div class="form-btns">
+    <button class="form-btn" type="reset" (click)='hideForm()' mat-raised-button color="cancel">Отмена</button>
+    <button class="form-btn" type="submit" mat-raised-button color="primary">Отправить</button>
+  </div>
+</form>
+
+

@@ -1,0 +1,19 @@
+.card{
+  max-width: 100%;
+  min-width: 280px;
+  width: 360px;
+}
+@media screen and (max-width: 475px) {
+  .card{
+    width: auto;
+  }
+}
+.card__title{
+  color: #333;
+}
+
+mat-list-option[aria-selected="true"] {
+  text-decoration: line-through;
+  background: transparent;
+
+}
