@@ -11,21 +11,23 @@ export class ProjectsService {
 
   projects$: BehaviorSubject<Array<CardsInterface>>;
   projectsSub$!: Subscription;
+  loading$:BehaviorSubject<Boolean>;
 
   constructor(
     private api: ApiService
   ) {
     this.projects$ = new BehaviorSubject<Array<CardsInterface>>([]);
+    this.loading$ = new BehaviorSubject<Boolean>(true);
   }
 
   getCards = (): BehaviorSubject<Array<CardsInterface>> => {
-
     if (this.projects$.getValue().length <= 0 && !this.projectsSub$) {
       this.projectsSub$ = this.api.getDataFromApi().subscribe(
         result => {
           const cards = plainToClass(CardsInterface, result)
           this.projects$.next(cards);
           this.projectsSub$.unsubscribe();
+          this.loading$.next(false);
         },
         error => console.error(error)
       );
@@ -34,6 +36,8 @@ export class ProjectsService {
   }
 
   checkTask = (card: CardsInterface, task: TasksInterface) => {
+
+    this.loading$.next(true);
 
     let cardData = classToPlain(card)
     let taskData = classToPlain(task)
@@ -51,6 +55,7 @@ export class ProjectsService {
           })
         })
         this.projectsSub$.unsubscribe();
+        this.loading$.next(false);
       },
       error => console.error(error)
     );
@@ -58,6 +63,8 @@ export class ProjectsService {
   }
 
   addCard = (task: TasksInterface) => {
+
+    this.loading$.next(true);
 
     const taskData = classToPlain(task)
 
@@ -77,6 +84,7 @@ export class ProjectsService {
           this.projects$.getValue().push(card)
         }
         this.projectsSub$.unsubscribe();
+        this.loading$.next(false);
       },
       error => console.error(error)
     );

@@ -1,6 +1,6 @@
 <div class="app">
+  <app-loader *ngIf="projects$.loading$ | async"></app-loader>
   <app-header (onClickedBtn)="showForm($event)"></app-header>
   <app-cards-container></app-cards-container>
   <app-popup (onClickedBtns)="hideForm($event)" *ngIf="popupOpen"></app-popup>
-  <mat-spinner *ngIf="loading"></mat-spinner>
 </div>

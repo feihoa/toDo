@@ -19,6 +19,7 @@ import { FormComponent } from './form/form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { PopupComponent } from './popup/popup.component';
+import { LoaderComponent } from './loader/loader.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FormComponent,
     PopupComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

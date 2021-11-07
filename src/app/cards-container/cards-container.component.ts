@@ -10,7 +10,7 @@ import { ProjectsService } from '../data/projects.service';
 export class CardsContainerComponent implements OnInit {
 
   constructor(
-    public projects: ProjectsService,
+    public projects$: ProjectsService,
   ) { }
 
 

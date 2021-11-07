@@ -17,15 +17,15 @@ export class FormComponent implements OnInit {
   @Output() onClickedBtn = new EventEmitter<boolean>();
 
   constructor(
-    public projects: ProjectsService,
+    public projects$: ProjectsService,
     private fb: FormBuilder) { this.initForm(); }
 
   ngOnInit() { }
 
   changed(e: any) {
     !e.value ?
-    this.isNewCategory = true :
-    this.isNewCategory = false;
+      this.isNewCategory = true :
+      this.isNewCategory = false;
 
   }
   initForm() {
@@ -53,7 +53,7 @@ export class FormComponent implements OnInit {
       this.taskForm.value.title = this.taskForm.value.newTitle;
     }
     delete this.taskForm.value.newTitle;
-    this.projects.addCard(this.taskForm.value)
+    this.projects$.addCard(this.taskForm.value)
 
     this.hideForm()
   }

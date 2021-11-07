@@ -15,13 +15,13 @@ export class CardComponent implements OnInit {
   @Input() card !: any;
 
   constructor(
-    public projects: ProjectsService,
+    public projects$: ProjectsService,
   ) { }
 
   ngOnInit(): void {
   }
 
   checked(card: CardsInterface, task: TasksInterface) {
-    this.projects.checkTask(card, task)
+    this.projects$.checkTask(card, task)
   }
 }
