@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todo';
-  popupOpen = false;
+  popupOpen:boolean = false;
+  loading:boolean = false;
 
   constructor() { }
 
