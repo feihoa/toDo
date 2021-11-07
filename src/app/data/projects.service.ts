@@ -4,7 +4,7 @@ import { CardsInterface } from './cardsInterface';
 import { TasksInterface } from './tasksInterface';
 import { plainToClass } from 'class-transformer';
 import { classToPlain } from 'class-transformer';
-import { HttpServiceService } from './http-service.service';
+import { ApiService } from './api.service';
 
 @Injectable()
 export class ProjectsService {
@@ -13,7 +13,7 @@ export class ProjectsService {
   projectsSub$!: Subscription;
 
   constructor(
-    private api: HttpServiceService
+    private api: ApiService
   ) {
     this.projects$ = new BehaviorSubject<Array<CardsInterface>>([]);
   }
@@ -21,63 +21,64 @@ export class ProjectsService {
   getCards = (): BehaviorSubject<Array<CardsInterface>> => {
 
     if (this.projects$.getValue().length <= 0 && !this.projectsSub$) {
-        this.projectsSub$ = this.api.getDataFromApi().subscribe(
-            result => {
-              const cards = plainToClass(CardsInterface, result)
-                this.projects$.next(cards);
-                this.projectsSub$.unsubscribe();
-            },
-            error => console.error(error)
-        );
-      }
+      this.projectsSub$ = this.api.getDataFromApi().subscribe(
+        result => {
+          const cards = plainToClass(CardsInterface, result)
+          this.projects$.next(cards);
+          this.projectsSub$.unsubscribe();
+        },
+        error => console.error(error)
+      );
+    }
     return this.projects$;
   }
 
-  checkTask = (card:CardsInterface, task: TasksInterface) => {
+  checkTask = (card: CardsInterface, task: TasksInterface) => {
 
     let cardData = classToPlain(card)
     let taskData = classToPlain(task)
 
-    this.projectsSub$ = this.api.updateData(cardData.id, {task:taskData}).subscribe(
+    this.projectsSub$ = this.api.updateData(cardData.id, { task: taskData }).subscribe(
       result => {
         const task = plainToClass(TasksInterface, result)
-           this.projects$.getValue().forEach((item) => {
-            item.todos.forEach((el:TasksInterface) => {
-              if(el.id == task.id){
-                el.isCompleted = task.isCompleted
-                return
-              }
-            })
+
+        this.projects$.getValue().forEach((item) => {
+          item.todos.forEach((el: TasksInterface) => {
+            if (el.id == task.id) {
+              el.isCompleted = task.isCompleted
+              return
+            }
           })
-           this.projectsSub$.unsubscribe();
+        })
+        this.projectsSub$.unsubscribe();
       },
       error => console.error(error)
     );
     return this.projects$;
   }
 
-  addCard = (task:TasksInterface) => {
+  addCard = (task: TasksInterface) => {
 
     const taskData = classToPlain(task)
 
-    this.projectsSub$ = this.api.postData({task:taskData}).subscribe(
-        result => {
-          const card = plainToClass(CardsInterface, result)
+    this.projectsSub$ = this.api.postData({ task: taskData }).subscribe(
+      result => {
+        const card = plainToClass(CardsInterface, result)
 
-          let exists:boolean=false;
-          this.projects$.getValue().forEach((item) => {
-            if(item.title == card.title){
-              exists = true;
-              item.todos.push(card.todos[0])
+        let exists: boolean = false;
+        this.projects$.getValue().forEach((item) => {
+          if (item.title == card.title) {
+            exists = true;
+            item.todos.push(card.todos[0])
             return
-            }
-          })
-          if(!exists){
-            this.projects$.getValue().push(card)
           }
-          this.projectsSub$.unsubscribe();
-        },
-        error => console.error(error)
+        })
+        if (!exists) {
+          this.projects$.getValue().push(card)
+        }
+        this.projectsSub$.unsubscribe();
+      },
+      error => console.error(error)
     );
     return this.projects$;
   }

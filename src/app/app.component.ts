@@ -1,10 +1,4 @@
-import { Component} from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { HttpServiceService } from './data/http-service.service';
-import { CardsInterface } from './data/cardsInterface';
-import { TasksInterface } from './data/tasksInterface';
-import { plainToClass} from 'class-transformer';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,23 +8,19 @@ import { plainToClass} from 'class-transformer';
 export class AppComponent {
   title = 'todo';
   popupOpen = false;
-  // newTask:TasksInterface[] = []
 
-  constructor(
-    private dataApi: HttpServiceService,
-    private http: HttpClient)
-    {}
+  constructor() { }
 
-  ngOnInit(){
+  ngOnInit() { }
 
-  }
-  showForm(bool:boolean) {
-    if (bool){
+  showForm(bool: boolean) {
+    if (bool) {
       this.popupOpen = true;
     }
   };
-  hideForm(bool:boolean) {
-    if (bool){
+
+  hideForm(bool: boolean) {
+    if (bool) {
       this.popupOpen = false;
     }
   };
