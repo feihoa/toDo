@@ -49,8 +49,10 @@ export class FormComponent implements OnInit {
         .forEach(controlName => this.controls[controlName].markAsTouched());
       return;
     }
-    if (this.isNewCategory) {
+    if (this.isNewCategory && this.taskForm.value.newTitle) {
       this.taskForm.value.title = this.taskForm.value.newTitle;
+    } else if (this.isNewCategory && !this.taskForm.value.newTitle) {
+      this.taskForm.value.title = "Прочее"
     }
     delete this.taskForm.value.newTitle;
     this.projects$.addCard(this.taskForm.value)
