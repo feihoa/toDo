@@ -18,7 +18,6 @@ export class ProjectsService {
     this.projects$ = new BehaviorSubject<Array<CardsInterface>>([]);
   }
 
-
   getCards = (): BehaviorSubject<Array<CardsInterface>> => {
 
     if (this.projects$.getValue().length <= 0 && !this.projectsSub$) {
@@ -35,6 +34,7 @@ export class ProjectsService {
   }
 
   checkTask = (card:CardsInterface, task: TasksInterface) => {
+
     let cardData = classToPlain(card)
     let taskData = classToPlain(task)
 
@@ -57,12 +57,13 @@ export class ProjectsService {
   }
 
   addCard = (task:TasksInterface) => {
+
     const taskData = classToPlain(task)
+
     this.projectsSub$ = this.api.postData({task:taskData}).subscribe(
         result => {
-          const card =  plainToClass(CardsInterface, result)
-          console.log(card)
-          console.log('card')
+          const card = plainToClass(CardsInterface, result)
+
           let exists:boolean=false;
           this.projects$.getValue().forEach((item) => {
             if(item.title == card.title){
