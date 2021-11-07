@@ -1,5 +1,5 @@
 <form class="taskForm" [formGroup]="taskForm" (submit)='formSubmitted()'>
-<h2 class="form-title">Новая задача</h2>
+  <h2 class="form-title">Новая задача</h2>
 
   <mat-form-field class="taskForm__field" appearance="fill">
     <mat-label>Название задачи...</mat-label>
@@ -8,17 +8,16 @@
 
   <mat-form-field class="taskForm__field" appearance="fill">
     <mat-label>Категория</mat-label>
-    <mat-select id="titleSelect" required formControlName="title" (selectionChange)="changed($event.value)"
-    >
-      <mat-option *ngFor="let category of categories "
-      [value]="category">{{category}}</mat-option>
-      <mat-option value="Новая категория">Новая категория</mat-option>
+    <mat-select id="titleSelect" required formControlName="title" (selectionChange)="changed($event.value)">
+      <mat-option *ngFor="let category of projects.getCards() | async;" [value]="category.title">{{category.title}}
+      </mat-option>
+      <mat-option style="color: blue" value="Новая категория">Новая категория</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field class="taskForm__field" *ngIf="isNewCategory" appearance="fill">
     <mat-label>Название новой категории</mat-label>
-    <input matInput type="text" id="newTitle" formControlName="title" >
+    <input matInput type="text" id="newTitle" formControlName="newTitle">
   </mat-form-field>
 
 
@@ -27,5 +26,3 @@
     <button class="form-btn" type="submit" mat-raised-button color="primary">Отправить</button>
   </div>
 </form>
-
-

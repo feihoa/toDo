@@ -1,8 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpServiceService } from '../data/http-service.service';
-import { plainToClass } from 'class-transformer';
-import { CardsInterface } from '../data/cardsInterface';
 import { ProjectsService } from '../data/projects.service';
 
 
@@ -13,66 +10,52 @@ import { ProjectsService } from '../data/projects.service';
 })
 export class FormComponent implements OnInit {
 
-  taskForm:FormGroup = new FormGroup({});
-  categories:any = []
-  isNewCategory:boolean=false;
-  allCards: CardsInterface[] = [];
-  cardData :any= [];
-  titleSelect:string = '';
+  taskForm: FormGroup = new FormGroup({});
+  isNewCategory: boolean = false;
   controls = this.taskForm.controls;
 
-   @Output() onClickedBtn = new EventEmitter<boolean>();
+  @Output() onClickedBtn = new EventEmitter<boolean>();
 
   constructor(
-    public projects : ProjectsService,
-    private httpServiceService: HttpServiceService,
-    private fb: FormBuilder)
+    public projects: ProjectsService,
+    private fb: FormBuilder) { this.initForm(); }
 
-  { this.initForm();  }
+  ngOnInit() { }
 
-  ngOnInit(){
-    this.getCategoties()
-    console.log(this.projects)
-   }
-  getCategoties(){
-    this.httpServiceService.getDataFromApi().subscribe({
-      next: (data) => {
-        data.forEach(item => {
-          this.cardData.push(item.title)
-        })
-          this.categories = plainToClass(FormComponent, this.cardData);
-      },
-        error: (err) => console.log(err),
-    });
-  }
-   changed(value:any){
+  changed(value: any) {
     value == 'Новая категория' ?
-    this.isNewCategory = true :
-    this.isNewCategory = false;
-   }
-   initForm(){
+      this.isNewCategory = true :
+      this.isNewCategory = false;
+
+  }
+  initForm() {
     this.taskForm = this.fb.group({
-      text: ['',[
+      text: ['', [
         Validators.required,
-       ]],
+      ]],
       title: ['', [
         Validators.required,
-       ]],
+      ]],
+      newTitle: [''],
     });
-   }
-   hideForm() {
-     this.onClickedBtn.emit(false);
-   }
-   formSubmitted(){
+  }
+  hideForm() {
+    this.onClickedBtn.emit(false);
+  }
+  formSubmitted() {
 
     if (this.taskForm.invalid) {
       Object.keys(this.controls)
-       .forEach(controlName => this.controls[controlName].markAsTouched());
-       return;
-      }
-      this.projects.addCard(this.taskForm.value)
+        .forEach(controlName => this.controls[controlName].markAsTouched());
+      return;
+    }
+    if (this.isNewCategory) {
+      this.taskForm.value.title = this.taskForm.value.newTitle;
+    }
+    delete this.taskForm.value.newTitle;
+    this.projects.addCard(this.taskForm.value)
 
-      this.hideForm()
-   }
-
+    this.hideForm()
   }
+
+}

@@ -11,7 +11,7 @@ export class CardsContainerComponent implements OnInit {
 
   constructor(
     public projects: ProjectsService,
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {

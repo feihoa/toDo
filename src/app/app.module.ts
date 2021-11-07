@@ -11,7 +11,7 @@ import { CardsContainerComponent } from './cards-container/cards-container.compo
 import { HeaderComponent } from './header/header.component';
 
 import { MatCardModule } from '@angular/material/card';
-import { MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormComponent } from './form/form.component';

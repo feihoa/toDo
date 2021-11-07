@@ -9,9 +9,9 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 
-export class HttpServiceService {
+export class ApiService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private url = 'https://gruesome-catacombs-42254.herokuapp.com';
   // private url = 'http://localhost:3000';
@@ -24,17 +24,17 @@ export class HttpServiceService {
   public getDataFromApi(): Observable<CardsInterface[]> {
     this.endPoint = '/projects';
     return this.http.get<CardsInterface[]>(this.url + this.endPoint)
-    .pipe(catchError(this.erroHandler));
+      .pipe(catchError(this.erroHandler));
   }
-  public updateData(cardId:number, task: any): Observable<TasksInterface> {
+  public updateData(cardId: number, task: any): Observable<TasksInterface> {
     this.endPoint = `/projects/${cardId}/todo/${task.task.id}`;
     return this.http.patch<TasksInterface>(this.url + this.endPoint, task, this.httpOptions)
-    .pipe(catchError(this.erroHandler));
+      .pipe(catchError(this.erroHandler));
   }
   public postData(task: any): Observable<CardsInterface> {
     this.endPoint = `/todos`;
     return this.http.post<CardsInterface>(this.url + this.endPoint, task, this.httpOptions)
-    .pipe(catchError(this.erroHandler));
+      .pipe(catchError(this.erroHandler));
   }
   erroHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'server Error');
