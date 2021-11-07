@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { FormComponent } from './form/form.component';
 import { MatInputModule } from '@angular/material/input';
@@ -41,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
 
     HttpClientModule
 

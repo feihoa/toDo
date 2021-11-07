@@ -8,10 +8,10 @@
 
   <mat-form-field class="taskForm__field" appearance="fill">
     <mat-label>Категория</mat-label>
-    <mat-select id="titleSelect" required formControlName="title" (selectionChange)="changed($event.value)">
+    <mat-select id="titleSelect" required formControlName="title" (selectionChange)="changed($event)">
       <mat-option *ngFor="let category of projects.getCards() | async;" [value]="category.title">{{category.title}}
       </mat-option>
-      <mat-option style="color: blue" value="Новая категория">Новая категория</mat-option>
+      <mat-option style="color: blue" value="Новая категория" (click)="changed($event)">Новая категория</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -22,7 +22,7 @@
 
 
   <div class="form-btns">
-    <button class="form-btn" type="reset" (click)='hideForm()' mat-raised-button color="cancel">Отмена</button>
+    <button class="form-btn" type="reset" (click)='hideForm()' mat-raised-button style="background:#D7D7D7">Отмена</button>
     <button class="form-btn" type="submit" mat-raised-button color="primary">Отправить</button>
   </div>
 </form>

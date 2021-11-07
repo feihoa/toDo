@@ -2,4 +2,5 @@
   <app-header (onClickedBtn)="showForm($event)"></app-header>
   <app-cards-container></app-cards-container>
   <app-popup (onClickedBtns)="hideForm($event)" *ngIf="popupOpen"></app-popup>
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </div>

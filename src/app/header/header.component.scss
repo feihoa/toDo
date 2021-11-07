@@ -22,3 +22,8 @@
   box-shadow: none;
   cursor: pointer;
 }
+.header-btn:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}

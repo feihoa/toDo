@@ -22,10 +22,10 @@ export class FormComponent implements OnInit {
 
   ngOnInit() { }
 
-  changed(value: any) {
-    value == 'Новая категория' ?
-      this.isNewCategory = true :
-      this.isNewCategory = false;
+  changed(e: any) {
+    !e.value ?
+    this.isNewCategory = true :
+    this.isNewCategory = false;
 
   }
   initForm() {
