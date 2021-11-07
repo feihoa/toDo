@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProjectsService } from './data/projects.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'todo';
   popupOpen:boolean = false;
-  loading:boolean = false;
 
-  constructor() { }
+  constructor(
+    public projects$: ProjectsService,
+
+  ) { }
 
   ngOnInit() { }
 
