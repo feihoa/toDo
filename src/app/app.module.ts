@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardComponent } from './card/card.component';
 import { CardsContainerComponent } from './cards-container/cards-container.component';
 import { HeaderComponent } from './header/header.component';
+import { SnackBarComponent } from './snack-bar/snack-bar.component'
 
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -18,8 +19,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormComponent } from './form/form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { PopupComponent } from './popup/popup.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoaderComponent } from './loader/loader.component';
+import { PopupComponent } from './popup/popup.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormComponent,
     PopupComponent,
     LoaderComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +48,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
 
-    HttpClientModule
+    HttpClientModule,
 
   ],
   providers: [ProjectsService],

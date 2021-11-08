@@ -12,12 +12,14 @@ export class ProjectsService {
   projects$: BehaviorSubject<Array<CardsInterface>>;
   projectsSub$!: Subscription;
   loading$:BehaviorSubject<Boolean>;
+  error$:BehaviorSubject<Boolean>;
 
   constructor(
     private api: ApiService
   ) {
     this.projects$ = new BehaviorSubject<Array<CardsInterface>>([]);
     this.loading$ = new BehaviorSubject<Boolean>(true);
+    this.error$ = new BehaviorSubject<Boolean>(false);
   }
 
   getCards = (): BehaviorSubject<Array<CardsInterface>> => {
@@ -29,15 +31,19 @@ export class ProjectsService {
           this.projectsSub$.unsubscribe();
           this.loading$.next(false);
         },
-        error => console.error(error)
+        error => {
+          console.error(error)
+          this.loading$.next(false);
+          this.error$.next(true)
+        }
       );
     }
     return this.projects$;
   }
 
   checkTask = (card: CardsInterface, task: TasksInterface) => {
-
     this.loading$.next(true);
+    this.error$.next(false)
 
     let cardData = classToPlain(card)
     let taskData = classToPlain(task)
@@ -57,14 +63,18 @@ export class ProjectsService {
         this.projectsSub$.unsubscribe();
         this.loading$.next(false);
       },
-      error => console.error(error)
+      error => {
+        console.error(error)
+        this.loading$.next(false);
+        this.error$.next(true)
+      }
     );
     return this.projects$;
   }
 
   addCard = (task: TasksInterface) => {
-
     this.loading$.next(true);
+    this.error$.next(false)
 
     const taskData = classToPlain(task)
 
@@ -86,7 +96,11 @@ export class ProjectsService {
         this.projectsSub$.unsubscribe();
         this.loading$.next(false);
       },
-      error => console.error(error)
+      error => {
+        console.error(error)
+        this.loading$.next(false);
+        this.error$.next(true)
+      }
     );
     return this.projects$;
   }
