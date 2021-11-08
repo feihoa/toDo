@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProjectsService } from './data/projects.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,13 @@ import { ProjectsService } from './data/projects.service';
 })
 export class AppComponent {
   title = 'todo';
-  popupOpen:boolean = false;
+  popupOpen: boolean = false;
 
   constructor(
     public projects$: ProjectsService,
-
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   showForm(bool: boolean) {
     if (bool) {
