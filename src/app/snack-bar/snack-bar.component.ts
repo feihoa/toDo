@@ -11,7 +11,7 @@ export class SnackBarComponent implements OnInit {
   @Input() message:boolean = true;
 
   constructor(
-    public projects$: ProjectsService,
+    public projects: ProjectsService,
     private _snackBar: MatSnackBar,
   ) { }
 

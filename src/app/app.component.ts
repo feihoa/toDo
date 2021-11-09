@@ -11,7 +11,7 @@ export class AppComponent {
   popupOpen: boolean = false;
 
   constructor(
-    public projects$: ProjectsService,
+    public projects: ProjectsService,
   ) { }
 
   ngOnInit() {}

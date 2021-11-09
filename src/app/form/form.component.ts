@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
   @Output() onClickedBtn = new EventEmitter<boolean>();
 
   constructor(
-    public projects$: ProjectsService,
+    public projects: ProjectsService,
     private fb: FormBuilder) { this.initForm(); }
 
   ngOnInit() { }
@@ -55,7 +55,7 @@ export class FormComponent implements OnInit {
       this.taskForm.value.title = "Прочее"
     }
     delete this.taskForm.value.newTitle;
-    this.projects$.addCard(this.taskForm.value)
+    this.projects.addCard(this.taskForm.value)
 
     this.hideForm()
   }

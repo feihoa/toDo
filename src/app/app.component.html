@@ -1,6 +1,6 @@
 <div class="app">
-  <app-loader *ngIf="projects$.loading$ | async"></app-loader>
-  <app-snack-bar *ngIf="projects$.error$ | async"></app-snack-bar>
+  <app-loader *ngIf="projects.loading$ | async"></app-loader>
+  <app-snack-bar *ngIf="projects.error$ | async"></app-snack-bar>
   <app-header (onClickedBtn)="showForm($event)"></app-header>
   <app-cards-container></app-cards-container>
   <app-popup (onClickedBtns)="hideForm($event)" *ngIf="popupOpen"></app-popup>
