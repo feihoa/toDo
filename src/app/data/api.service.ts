@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { CardsInterface } from './cardsInterface';
 import { TasksInterface } from './tasksInterface';
@@ -11,10 +11,10 @@ import { catchError } from 'rxjs/operators';
 
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  private url = 'https://gruesome-catacombs-42254.herokuapp.com';
-  // private url = 'http://localhost:3000';
+  private url = isDevMode() ? 'http://localhost:3000' : 'https://gruesome-catacombs-42254.herokuapp.com';
+
   private endPoint = '/';
 
   httpOptions = {

@@ -22,9 +22,6 @@ export class PopupComponent implements OnInit {
       this.onClickedBtn();
     }
   }
-  checkBtn(event: Event){
-    console.log(event)
-  }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     event.key === "Escape" ?

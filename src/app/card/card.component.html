@@ -2,7 +2,7 @@
   <mat-card-title class="card__title">{{card.title}}</mat-card-title>
   <hr />
   <mat-selection-list *ngFor="let task of card.todos ">
-    <mat-list-option class="mat-primary red" checkboxPosition="before" attr.cat-id={{catId}} id={{task.id}}
+    <mat-list-option class="mat-primary red" checkboxPosition="before" attr.cat-id={{card.id}} id={{task.id}}
       selected={{task.isCompleted}} (click)="checked(card, task)">
       {{task.text}}
     </mat-list-option>

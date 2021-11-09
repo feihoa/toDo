@@ -8,7 +8,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'todo';
   popupOpen: boolean = false;
 
   constructor(

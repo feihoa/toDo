@@ -11,7 +11,6 @@ import { ProjectsService } from '../data/projects.service';
 
 export class CardComponent implements OnInit {
 
-  @Input() catId !: number;
   @Input() card !: any;
 
   constructor(
