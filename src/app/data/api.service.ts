@@ -13,7 +13,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  private url = isDevMode() ? 'http://localhost:3000' : 'https://gruesome-catacombs-42254.herokuapp.com';
+  private url =  'https://gruesome-catacombs-42254.herokuapp.com';
 
   private endPoint = '/';
 
