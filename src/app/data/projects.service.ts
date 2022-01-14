@@ -19,6 +19,9 @@ export class ProjectsService {
   ) {
     this.projects$ = new BehaviorSubject<Array<CardsInterface>>([]);
     this.loading$ = new BehaviorSubject<Boolean>(true);
+
+
+
     this.error$ = new BehaviorSubject<Boolean>(false);
   }
 
