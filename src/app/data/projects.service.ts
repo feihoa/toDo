@@ -11,6 +11,7 @@ export class ProjectsService {
 
   projects$: BehaviorSubject<Array<CardsInterface>>;
   projectsSub$!: Subscription;
+  console.log('d')
   loading$:BehaviorSubject<Boolean>;
   error$:BehaviorSubject<Boolean>;
 
